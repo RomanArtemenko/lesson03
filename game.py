@@ -36,9 +36,7 @@ class Game:
       
         for row in range(self.width):            
             for col in range(self.width - 1):
-                rev = list(range(self.width - col))
-                rev.reverse()
-                for pos in rev:
+                for pos in range(self.width - 1, col, -1):
                     if cell(row, pos) == self.EMPTY_CELL and cell(row, pos - 1) != self.EMPTY_CELL:
                         self.field[row][pos], self.field[row][pos - 1] = self.field[row][pos - 1], self.field[row][pos] 
 
@@ -55,11 +53,10 @@ class Game:
         cell = self._get_cell
 
         for col in range(self.width):
-            print("Column : " + str(col))
             for row in range(self.width - 1):
-                for pos in range(self.width - 1 - row):
-                    if cell(pos, col) == self.EMPTY_CELL and cell(pos + 1, col) != self.EMPTY_CELL:
-                        self.field[pos][col], self.field[pos + 1][col] = self.field[pos + 1][col], self.field[pos][col] 
+                for pos in range(self.width - 1, row, -1):
+                    if cell(pos, col) == self.EMPTY_CELL and cell(pos - 1, col) != self.EMPTY_CELL:
+                        self.field[pos][col], self.field[pos - 1][col] = self.field[pos - 1][col], self.field[pos][col] 
  
     def has_moves(self):
         for row in self.field:
@@ -113,16 +110,16 @@ def main():
  
         if c in ('l', 'L'):
             game.move_left()
-            game.add_number(2, game.NUBERS)
+            # game.add_number(2, game.NUBERS)
         elif c in ('r', 'R'):
             game.move_right()
-            game.add_number(2, game.NUBERS)
+            # game.add_number(2, game.NUBERS)
         elif c in ('u', 'U'):
             game.move_up()
-            game.add_number(2, game.NUBERS)
+            # game.add_number(2, game.NUBERS)
         elif c in ('d', 'D'):
             game.move_down()
-            game.add_number(2, game.NUBERS)
+            # game.add_number(2, game.NUBERS)
         elif c in ('q', 'Q'):
             break
  
