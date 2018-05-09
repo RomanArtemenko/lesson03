@@ -163,16 +163,12 @@ def main():
  
         if c in ('l', 'L'):
             game.move_left()
-            # game.add_number(2, game.NUBERS)
         elif c in ('r', 'R'):
             game.move_right()
-            # game.add_number(2, game.NUBERS)
         elif c in ('u', 'U'):
             game.move_up()
-            # game.add_number(2, game.NUBERS)
         elif c in ('d', 'D'):
             game.move_down()
-            # game.add_number(2, game.NUBERS)
         elif c in ('q', 'Q'):
             break
  
