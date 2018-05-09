@@ -29,8 +29,22 @@ class Game:
             for col in range(self.width - 1):
                 for pos in range(self.width - 1 - col):
                     if cell(row, pos) == self.EMPTY_CELL and cell(row, pos + 1) != self.EMPTY_CELL:
-                        self.field[row][pos], self.field[row][pos + 1] = self.field[row][pos + 1], self.field[row][pos] 
+                        self.field[row][pos], self.field[row][pos + 1] = self.field[row][pos + 1], self.field[row][pos]                         
  
+        for row in range(self.width):
+            for col in range(self.width - 1):
+                if cell(row, col) != self.EMPTY_CELL and cell(row, col) == cell(row, col + 1):
+                    self.field[row][col], self.field[row][col + 1] = self.field[row][col] * 2, self.EMPTY_CELL
+                    self.score += self.field[row][col]  
+
+        for row in range(self.width):
+            for col in range(self.width - 1):
+                for pos in range(self.width - 1 - col):
+                    if cell(row, pos) == self.EMPTY_CELL and cell(row, pos + 1) != self.EMPTY_CELL:
+                        self.field[row][pos], self.field[row][pos + 1] = self.field[row][pos + 1], self.field[row][pos] 
+
+        self.add_number(2, self.NUBERS)
+
     def move_right(self):
         cell = self._get_cell
       
@@ -40,6 +54,20 @@ class Game:
                     if cell(row, pos) == self.EMPTY_CELL and cell(row, pos - 1) != self.EMPTY_CELL:
                         self.field[row][pos], self.field[row][pos - 1] = self.field[row][pos - 1], self.field[row][pos] 
 
+        for row in range(self.width):            
+            for col in range(self.width - 1, 0, -1):
+                if cell(row, col) != self.EMPTY_CELL and cell(row, col) == cell(row, col - 1):
+                    self.field[row][col], self.field[row][col - 1] = self.field[row][col] * 2, self.EMPTY_CELL
+                    self.score += self.field[row][col] 
+
+        for row in range(self.width):            
+            for col in range(self.width - 1):
+                for pos in range(self.width - 1, col, -1):
+                    if cell(row, pos) == self.EMPTY_CELL and cell(row, pos - 1) != self.EMPTY_CELL:
+                        self.field[row][pos], self.field[row][pos - 1] = self.field[row][pos - 1], self.field[row][pos] 
+        
+        self.add_number(2, self.NUBERS)
+
     def move_up(self):
         cell = self._get_cell
 
@@ -47,9 +75,22 @@ class Game:
             for row in range(self.width - 1):
                 for pos in range(self.width - 1 - row):
                     if cell(pos, col) == self.EMPTY_CELL and cell(pos + 1, col) != self.EMPTY_CELL:
+                        self.field[pos][col], self.field[pos + 1][col] = self.field[pos + 1][col], self.field[pos][col]
+
+        for col in range(self.width):
+            for row in range(self.width - 1):
+                if cell(row, col) != self.EMPTY_CELL and cell(row, col) == cell(row + 1, col):
+                    self.field[row][col], self.field[row + 1][col] = self.field[row][col] * 2, self.EMPTY_CELL
+
+        for col in range(self.width):
+            for row in range(self.width - 1):
+                for pos in range(self.width - 1 - row):
+                    if cell(pos, col) == self.EMPTY_CELL and cell(pos + 1, col) != self.EMPTY_CELL:
                         self.field[pos][col], self.field[pos + 1][col] = self.field[pos + 1][col], self.field[pos][col] 
  
-    def move_down(self):
+        self.add_number(2, self.NUBERS)
+
+    def move_down(self):                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
         cell = self._get_cell
 
         for col in range(self.width):
@@ -57,7 +98,21 @@ class Game:
                 for pos in range(self.width - 1, row, -1):
                     if cell(pos, col) == self.EMPTY_CELL and cell(pos - 1, col) != self.EMPTY_CELL:
                         self.field[pos][col], self.field[pos - 1][col] = self.field[pos - 1][col], self.field[pos][col] 
- 
+
+        for col in range(self.width):
+            for row in range(self.width - 1, 0, -1):
+                if cell(row, col) != self.EMPTY_CELL and cell(row, col) == cell(row - 1, col):
+                    self.field[row][col], self.field[row - 1][col] = self.field[row][col] * 2, self.EMPTY_CELL
+                    self.score += self.field[row][col]
+
+        for col in range(self.width):
+            for row in range(self.width - 1):
+                for pos in range(self.width - 1, row, -1):
+                    if cell(pos, col) == self.EMPTY_CELL and cell(pos - 1, col) != self.EMPTY_CELL:
+                        self.field[pos][col], self.field[pos - 1][col] = self.field[pos - 1][col], self.field[pos][col] 
+
+        self.add_number(2, self.NUBERS)
+
     def has_moves(self):
         for row in self.field:
             if self.EMPTY_CELL in row:
@@ -72,8 +127,6 @@ class Game:
 
     def _get_cell(self, row, col):
         return self.field[row][col]
-
- 
  
 def main():
     game = Game(4)
